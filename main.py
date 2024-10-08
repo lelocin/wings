@@ -30,6 +30,7 @@ def createConnection():
             database=os.getenv('DB_NAME')
         )
         print("Successfully connected to the database")
+
     except Error as e:
         print(f"Error connecting to MySQL: {e}")
         return None
@@ -44,15 +45,15 @@ def createTables(connection):
 
     # Define table columns for each table
     TABLE_COLUMNS = {
-        'artist': ['id', 'first_name', 'last_name', 'genre', 'email', 'desired_style', 'desired_capacity', 'keywords', 'other_requests'],
-        'venue': ['id', 'name', 'city', 'zipcode', 'phone', 'capacity', 'style', 'keywords'],
-        'past_show': ['show_id', 'venue_id', 'event_name', 'event_artist', 'date', 'audience_size', 'ticket_price', 'revenue', 'genre', 'keywords'],
-        'match': ['id', 'artist_id', 'venue_id', 'match_score']
+        'artists': ['id', 'first_name', 'last_name', 'genre', 'email', 'desired_style', 'desired_capacity', 'keywords', 'other_requests'],
+        'venues': ['id', 'name', 'city', 'zipcode', 'phone', 'capacity', 'style', 'keywords'],
+        'past_shows': ['show_id', 'venue_id', 'event_name', 'event_artist', 'date', 'audience_size', 'ticket_price', 'revenue', 'genre', 'keywords'],
+        'matches': ['id', 'artist_id', 'venue_id', 'match_score']
     }
 
     # Define the SQL statements to create tables
     tables = {
-        'artist': """
+        'artists': """
             CREATE TABLE IF NOT EXISTS artist (
                 id uuid PRIMARY KEY,
                 first_name VARCHAR(50) NOT NULL,
@@ -65,7 +66,7 @@ def createTables(connection):
                 other_requests TEXT
             )
         """,
-        'venue': """
+        'venues': """
             CREATE TABLE IF NOT EXISTS venue (
                 id uuid PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
@@ -77,7 +78,7 @@ def createTables(connection):
                 keywords TEXT
             )
         """,
-        'past_show': """
+        'past_shows': """
             CREATE TABLE IF NOT EXISTS past_show (
                 show_id uuid PRIMARY KEY,
                 venue_id uuid,
@@ -92,7 +93,7 @@ def createTables(connection):
                 FOREIGN KEY (venue_id) REFERENCES venue(id)
             )
         """,
-        'match': """
+        'matches': """
             CREATE TABLE IF NOT EXISTS match (
                 id uuid PRIMARY KEY,
                 artist_id uuid,
@@ -250,15 +251,15 @@ def createTables(connection):
 
     # Define table columns for each table
     TABLE_COLUMNS = {
-        'artist': ['id', 'first_name', 'last_name', 'genre', 'email', 'desired_style', 'desired_capacity', 'keywords', 'other_requests'],
-        'venue': ['id', 'name', 'city', 'zipcode', 'phone', 'capacity', 'style', 'keywords'],
-        'past_show': ['show_id', 'venue_id', 'event_name', 'event_artist', 'date', 'audience_size', 'ticket_price', 'revenue', 'genre', 'keywords'],
-        'match': ['id', 'artist_id', 'venue_id', 'match_score']
+        'artists': ['id', 'first_name', 'last_name', 'genre', 'email', 'desired_style', 'desired_capacity', 'keywords', 'other_requests'],
+        'venues': ['id', 'name', 'city', 'zipcode', 'phone', 'capacity', 'style', 'keywords'],
+        'past_shows': ['show_id', 'venue_id', 'event_name', 'event_artist', 'date', 'audience_size', 'ticket_price', 'revenue', 'genre', 'keywords'],
+        'matches': ['id', 'artist_id', 'venue_id', 'match_score']
     }
 
     # Define the SQL statements to create tables
     tables = {
-        'artist': """
+        'artists': """
             CREATE TABLE IF NOT EXISTS artist (
                 id uuid PRIMARY KEY,
                 first_name VARCHAR(50) NOT NULL,
@@ -271,7 +272,7 @@ def createTables(connection):
                 other_requests TEXT
             )
         """,
-        'venue': """
+        'venues': """
             CREATE TABLE IF NOT EXISTS venue (
                 id uuid PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
@@ -283,7 +284,7 @@ def createTables(connection):
                 keywords TEXT
             )
         """,
-        'past_show': """
+        'past_shows': """
             CREATE TABLE IF NOT EXISTS past_show (
                 show_id uuid PRIMARY KEY,
                 venue_id uuid,
@@ -298,7 +299,7 @@ def createTables(connection):
                 FOREIGN KEY (venue_id) REFERENCES venue(id)
             )
         """,
-        'match': """
+        'matches': """
             CREATE TABLE IF NOT EXISTS match (
                 id uuid PRIMARY KEY,
                 artist_id uuid,
