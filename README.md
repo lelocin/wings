@@ -56,3 +56,4 @@ To run the application:
 ```
 python3 main.py
 ```
+You can interact with our database by: 
