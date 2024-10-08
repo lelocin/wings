@@ -4,10 +4,10 @@ This program is used to create and manage our database of artists (users), venue
 
 ## Features
 
-- Add new artists, venues, past events, and math score entries
-- View all items in each of the four tables
-- Update information in an existing entry to one of the four tables
-- Delete entries from the database
+- INSERT new artists, venues, past events, and math score entries
+- VIEW all items in each of the four tables
+- UPDATE information in an existing entry to one of the four tables
+- DELETE entries from the database
 
 ## Prerequisites
 
@@ -28,14 +28,29 @@ This program is used to create and manage our database of artists (users), venue
    ```
    
 3. Create a virtual environment
-   
+   ```
+   python -m venv venv
+   ```
+
+   Activate the Virtual Environment 
+   ```
+   source venv/bin/activate
+   ```
+
 4. Install the required packages
+   ```
+   pip install -r requirements.txt
+   ```
+ 
 5. Set up your .env file
+   ```
+   touch .env
+   ```
 
 ## Usage
 
 To run the application:
 
 ```
-python main.py
+python3 main.py
 ```
