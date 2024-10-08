@@ -2,6 +2,8 @@
 
 This program is used to create and manage our database of artists (users), venues, venues' past events, and matches/match scores between artists and venues. It allows for creating tables, adding and removing elements, viewing the contents, and updating elements with new information in a MySQL database.
 
+Our team chose SQL because our entities have clear relationships and the data is more structured (e.g. artists fill out information with prompts provided by us). In addition, most of our analyses will be relational, such as matching venues to artists. 
+
 ## Features
 
 - INSERT new artists, venues, past events, and math score entries
