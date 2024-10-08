@@ -23,30 +23,59 @@ This program is used to create and manage our database of artists (users), venue
    ```
    
 2. Navigate to the project's directory
+   (For Mac)
    ```
    cd path/to/wings
    ```
-   
+   (For Windows) 
+   ```
+   cd path\to\wings
+   ```
+
+
 3. Create a virtual environment
    ```
    python -m venv venv
    ```
 
-   Activate the Virtual Environment 
+4. Activate the Virtual Environment 
+   (For Mac)
    ```
    source venv/bin/activate
    ```
+   (For Windows)
+   ```
+   venv\Scripts\activate
+   ```
 
-4. Install the required packages
+5. Install the required packages
    ```
    pip install -r requirements.txt
    ```
  
-5. Set up your .env file
+6. Set up your .env file
+  6a. Create a new .env file in the project root directory
+  (For Mac)
+  
    ```
    touch .env
    ```
+   (For Windows)
+   ```
+   type nul > .env
+   ```
+   6b. Open the '.env' file in a text editor
+   6c. Add the following your '.env' file and replace the placeholders with your actual MySQL connection details: 
+   ```
+   DB_HOST=my_mysql_host
+   DB_USER=myuser
+   DB_PASS=mypassword
+   DB_NAME=my_database_name
+   ```
+   6d. Save and close the '.env' file 
 
+   Note: Note: The `.env` file contains sensitive information. Make sure it's included in your `.gitignore` file to prevent it from being committed to version control.
+ 
 ## Usage
 
 To run the application:
