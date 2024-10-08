@@ -59,9 +59,9 @@ Our team chose SQL because our entities have clear relationships and the data is
  
 6. Set up your .env file
 
-  Create a new .env file in the project root directory
+   Create a new .env file in the project root directory
 
-  (For Mac)
+   (For Mac)
   
    ```
    touch .env
@@ -72,7 +72,7 @@ Our team chose SQL because our entities have clear relationships and the data is
    ```
 
    Open the '.env' file in a text editor.
-   
+
    Add the following your '.env' file and replace the placeholders with your actual MySQL connection details: 
    ```
    DB_HOST=my_mysql_host
