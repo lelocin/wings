@@ -25,6 +25,7 @@ Our team chose SQL because our entities have clear relationships and the data is
    ```
    
 2. Navigate to the project's directory
+
    (For Mac)
    ```
    cd path/to/wings
@@ -41,6 +42,7 @@ Our team chose SQL because our entities have clear relationships and the data is
    ```
 
 4. Activate the Virtual Environment 
+
    (For Mac)
    ```
    source venv/bin/activate
@@ -56,7 +58,8 @@ Our team chose SQL because our entities have clear relationships and the data is
    ```
  
 6. Set up your .env file
-  6a. Create a new .env file in the project root directory
+
+  Create a new .env file in the project root directory
   (For Mac)
   
    ```
@@ -66,17 +69,17 @@ Our team chose SQL because our entities have clear relationships and the data is
    ```
    type nul > .env
    ```
-   6b. Open the '.env' file in a text editor
-   6c. Add the following your '.env' file and replace the placeholders with your actual MySQL connection details: 
+    Open the '.env' file in a text editor
+    Add the following your '.env' file and replace the placeholders with your actual MySQL connection details: 
    ```
    DB_HOST=my_mysql_host
    DB_USER=myuser
    DB_PASS=mypassword
    DB_NAME=my_database_name
    ```
-   6d. Save and close the '.env' file 
+    Save and close the '.env' file 
 
-   Note: Note: The `.env` file contains sensitive information. Make sure it's included in your `.gitignore` file to prevent it from being committed to version control.
+   Note: The `.env` file contains sensitive information. Make sure it's included in your `.gitignore` file to prevent it from being committed to version control.
  
 ## Usage
 
