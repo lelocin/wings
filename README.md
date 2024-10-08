@@ -71,7 +71,8 @@ Our team chose SQL because our entities have clear relationships and the data is
    type nul > .env
    ```
 
-   Open the '.env' file in a text editor
+   Open the '.env' file in a text editor.
+   
    Add the following your '.env' file and replace the placeholders with your actual MySQL connection details: 
    ```
    DB_HOST=my_mysql_host
