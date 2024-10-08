@@ -2,7 +2,7 @@
 
 This program is used to create and manage our database of artists (users), venues, venues' past events, and matches/match scores between artists and venues. It allows for creating tables, adding and removing elements, viewing the contents, and updating elements with new information in a MySQL database.
 
-Our team chose SQL because our entities have clear relationships and the data is more structured (e.g. artists fill out information with prompts provided by us). In addition, most of our analyses will be relational, such as matching venues to artists. 
+Our team chose SQL because our entities have clear relationships and the data is more structured (e.g. artists fill out information with prompts provided by us). In addition, most of our analyses will be relational, such as matching venues to artists. Therefore, SQL can better help maintain our data integrity and consistency and can better perform the queries for our projects without adding complexity.  
 
 ## Features
 
@@ -56,4 +56,3 @@ To run the application:
 ```
 python3 main.py
 ```
-You can interact with our database by: 
