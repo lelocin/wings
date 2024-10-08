@@ -6,7 +6,7 @@ Our team chose SQL because our entities have clear relationships and the data is
 
 ## Features
 
-- INSERT new artists, venues, past events, and math score entries
+- INSERT new artists, venues, past events, and match score entries
 - VIEW all items in each of the four tables
 - UPDATE information in an existing entry to one of the four tables
 - DELETE entries from the database
