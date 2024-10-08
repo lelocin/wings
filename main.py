@@ -10,6 +10,10 @@ load_dotenv()
 # Dictionary to store table columns
 TABLE_COLUMNS = {}
 
+def generate_char12_uid():
+    # Generate a UUID4 and take the first 12 characters from its hex representation
+    return str(uuid.uuid4().hex)[:12]
+
 def createConnection():
     """
     Establishes a connection to the MySQL database using credentials stored in environment variables.
@@ -68,7 +72,7 @@ def createTables(connection):
     tables = {
         'artists': """
             CREATE TABLE IF NOT EXISTS artists (
-                id CHAR(36) PRIMARY KEY,
+                id CHAR(12) PRIMARY KEY,
                 first_name VARCHAR(50) NOT NULL,
                 last_name VARCHAR(50),
                 genre VARCHAR(50),
@@ -81,7 +85,7 @@ def createTables(connection):
         """,
         'venues': """
             CREATE TABLE IF NOT EXISTS venues (
-                id CHAR(36) PRIMARY KEY,
+                id CHAR(12) PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 city VARCHAR(50),
                 zipcode INT,
@@ -93,8 +97,8 @@ def createTables(connection):
         """,
         'past_shows': """
             CREATE TABLE IF NOT EXISTS past_shows (
-                show_id CHAR(36) PRIMARY KEY,
-                venue_id CHAR(36),
+                show_id CHAR(12) PRIMARY KEY,
+                venue_id CHAR(12),
                 event_name VARCHAR(255) NOT NULL,
                 event_artist VARCHAR(255),
                 date DATE,
@@ -108,9 +112,9 @@ def createTables(connection):
         """,
         'matches': """
             CREATE TABLE IF NOT EXISTS matches (
-                id CHAR(36) PRIMARY KEY,
-                artist_id CHAR(36),
-                venue_id CHAR(36),
+                id CHAR(12) PRIMARY KEY,
+                artist_id CHAR(12),
+                venue_id CHAR(12),
                 match_score BIGINT,
                 FOREIGN KEY (artist_id) REFERENCES artists(id),
                 FOREIGN KEY (venue_id) REFERENCES venues(id)
@@ -135,30 +139,30 @@ def add_sample_data(connection):
     """
     # Sample data for artists
     artist_data = [
-        (str(uuid.uuid4()), 'John', 'Doe', 'Rock', 'john.doe@example.com', 'Concert', 500, 'rock, loud, energetic', 'No pyrotechnics'),
-        (str(uuid.uuid4()), 'Jane', 'Smith', 'Jazz', 'jane.smith@example.com', 'Jazz Club', 200, 'jazz, acoustic, mellow', 'Piano required'),
-        (str(uuid.uuid4()), 'Emily', 'Clark', 'Pop', 'emily.clark@example.com', 'Festival', 2000, 'pop, dance, upbeat', 'Stage lighting')
+        (str(generate_char12_uid()), 'John', 'Doe', 'Rock', 'john.doe@example.com', 'Concert', 500, 'rock, loud, energetic', 'No pyrotechnics'),
+        (str(generate_char12_uid()), 'Jane', 'Smith', 'Jazz', 'jane.smith@example.com', 'Jazz Club', 200, 'jazz, acoustic, mellow', 'Piano required'),
+        (str(generate_char12_uid()), 'Emily', 'Clark', 'Pop', 'emily.clark@example.com', 'Festival', 2000, 'pop, dance, upbeat', 'Stage lighting')
     ]
 
     # Sample data for venues
     venue_data = [
-        (str(uuid.uuid4()), 'The Rock Arena', 'New York', 10001, 1234567890, 5000, 'Concert Hall', 'rock, arena, loud'),
-        (str(uuid.uuid4()), 'Jazz Corner', 'Chicago', 60601, 2345678901, 300, 'Jazz Club', 'jazz, intimate, cozy'),
-        (str(uuid.uuid4()), 'Pop Fest Grounds', 'Los Angeles', 90001, 3456789012, 10000, 'Festival Grounds', 'pop, festival, outdoor')
+        (str(generate_char12_uid()), 'The Rock Arena', 'New York', 10001, 1234567890, 5000, 'Concert Hall', 'rock, arena, loud'),
+        (str(generate_char12_uid()), 'Jazz Corner', 'Chicago', 60601, 2345678901, 300, 'Jazz Club', 'jazz, intimate, cozy'),
+        (str(generate_char12_uid()), 'Pop Fest Grounds', 'Los Angeles', 90001, 3456789012, 10000, 'Festival Grounds', 'pop, festival, outdoor')
     ]
 
     # Sample data for past shows
     past_show_data = [
-        (str(uuid.uuid4()), venue_data[0][0], 'Rock Fest', 'John Doe', '2023-06-15', 4500, 50, 225000, 'Rock', 'energetic, loud'),
-        (str(uuid.uuid4()), venue_data[1][0], 'Smooth Jazz Night', 'Jane Smith', '2023-07-20', 250, 75, 18750, 'Jazz', 'mellow, acoustic'),
-        (str(uuid.uuid4()), venue_data[2][0], 'Pop Explosion', 'Emily Clark', '2023-09-12', 9500, 60, 570000, 'Pop', 'dance, upbeat')
+        (str(generate_char12_uid()), venue_data[0][0], 'Rock Fest', 'John Doe', '2023-06-15', 4500, 50, 225000, 'Rock', 'energetic, loud'),
+        (str(generate_char12_uid()), venue_data[1][0], 'Smooth Jazz Night', 'Jane Smith', '2023-07-20', 250, 75, 18750, 'Jazz', 'mellow, acoustic'),
+        (str(generate_char12_uid()), venue_data[2][0], 'Pop Explosion', 'Emily Clark', '2023-09-12', 9500, 60, 570000, 'Pop', 'dance, upbeat')
     ]
 
     # Sample data for matches
     match_data = [
-        (str(uuid.uuid4()), artist_data[0][0], venue_data[0][0], 85),
-        (str(uuid.uuid4()), artist_data[1][0], venue_data[1][0], 90),
-        (str(uuid.uuid4()), artist_data[2][0], venue_data[2][0], 95)
+        (str(generate_char12_uid()), artist_data[0][0], venue_data[0][0], 85),
+        (str(generate_char12_uid()), artist_data[1][0], venue_data[1][0], 90),
+        (str(generate_char12_uid()), artist_data[2][0], venue_data[2][0], 95)
     ]
 
     try:
@@ -218,6 +222,35 @@ def add_item(connection, table):
     except Error as e:
         print(f"Error adding item to {table}: {e}")
 
+def get_venue_by_id(connection, venue_id):
+    """
+    Fetches a venue's details from the 'venues' table by its ID.
+    
+    Parameters:
+    - connection: The MySQL database connection object
+    - venue_id: The unique ID of the venue to fetch
+    
+    Returns:
+    - Venue details if found, otherwise a message indicating no such venue exists
+    """
+    try:
+        with connection.cursor() as cursor:
+            # Query to fetch the venue by its ID
+            cursor.execute(f"SELECT * FROM venues WHERE id = %s", (venue_id,))
+            venue = cursor.fetchone()
+            
+            if venue:
+                # Print the column names and the venue details
+                column_names = TABLE_COLUMNS.get('venues')
+                print("\nVenue details:")
+                print(" | ".join(column_names))
+                print(" | ".join([str(item) for item in venue]))
+            else:
+                print(f"No venue found with ID: {venue_id}")
+    except Error as e:
+        print(f"Error fetching venue by ID: {e}")
+
+
 # Function to view data from any table
 def view_data(connection, table):
     try:
@@ -261,6 +294,11 @@ def main():
 
     for table in ["artists", "venues", "past_shows", "matches"]:
         view_data(connection, table)
+
+    get_venue_id = input("Do you want to get specific venue details? (yes/no): ").strip().lower()
+    if get_venue_id == 'yes':   
+        venue_id = input("Enter a venue ID to fetch its details: ").strip()
+        get_venue_by_id(connection, venue_id)
 
 if __name__ == "__main__":
     main()
