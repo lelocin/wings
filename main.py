@@ -35,6 +35,20 @@ def createConnection():
         return None
     return connection
 
+# Function to drop (clear) all tables if they exist
+def clear_tables(connection):
+    tables = ['matches', 'past_shows', 'venues', 'artists']  # List of tables to drop in reverse dependency order
+    try:
+        with connection.cursor() as cursor:
+            for table in tables:
+                # Drop each table if it exists
+                cursor.execute(f"DROP TABLE IF EXISTS `{table}`")
+                print(f"Table '{table}' dropped successfully!")
+            connection.commit()
+    except Error as e:
+        print(f"Error dropping tables: {e}")
+
+
 def createTables(connection):
     """
     Creates the necessary tables (artists, venues, past_shows, matches) if they do not already exist.
@@ -232,6 +246,7 @@ def main():
     if connection is None:
         return
 
+    clear_tables(connection)
     # Create all necessary tables
     createTables(connection)
 
